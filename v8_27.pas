@@ -9,7 +9,7 @@ begin
 	for i := 1 to amount - 1 do
 	begin
 		readln(new);
-		if new >= current then
+		if new <= current then
 		begin
 			current := new;
 			consequent := consequent + 1;
