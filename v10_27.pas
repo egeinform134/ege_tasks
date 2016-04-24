@@ -1,72 +1,64 @@
 program vtentwentyseven;
 var
-	amount,i,success,temp,used,number:integer;
+	amount, i, number: integer;
 	min: array [1..3] of integer;
+	mincount: integer;
 begin
-	success := 1;
-	i := 0;
 	readln(amount);
-	readln(min[1]);
-	i := i + 1;
-	repeat
-		if i = amount then
+	mincount := 0;
+
+	for i := 1 to amount do
+	begin
+		readln(number);
+		if (mincount = 0) then
 		begin
-			success := 0;
-			break;
+			mincount := mincount + 1;
+			min[1] := number;
+			continue;
 		end;
-		readln(min[2]);
-		i := i + 1;
-	until min[2] <> min[1];
-	repeat
-		if i = amount then
+		if (number = min[1]) then
+			continue;
+		if (number < min[1]) then
 		begin
-			success := 0;
-			break;
+			if mincount > 1 then
+				min[3] := min[2];
+			min[2] := min[1];
+			min[1] := number;
+ 			mincount := mincount + 1;
+			continue;
 		end;
-		readln(min[3]);
-		i := i + 1;
-	until ( min[3] <> min[2] ) and ( min[3] <> min[2] );
-	used := i;
-	if success = 1
-	then
+		if (mincount = 1) then
 		begin
-			if min[3] < min[2] then
-			begin
-				temp := min[2];
-				min[2] := min[3];
-				min[3] := temp;
-			end;
-			if min[2] < min[1] then
-			begin
-				temp := min[1];
-				min[1] := min[2];
-				min[2] := temp;
-			end;
-			if min[3] < min[2] then
-			begin
-				temp := min[2];
-				min[2] := min[3];
-				min[3] := temp;
-			end;
-			for i := 1 to ( amount - used ) do
-			begin
-				readln(number);
-				if number < min[1] then
-				begin
-					min[3] := min[2];
-					min[2] := min[1];
-					min[1] := number;
-				end;
-				if ( number > min[1] ) and ( number < min[2] ) then
-				begin
-					min[3] := min[2];
-					min[2] := number;
-				end;
-				if ( number > min[2] ) and ( number < min[3] ) then
-					min[3] := number;
-			end;
-			writeln(min[3]);
-		end
+			mincount := mincount + 1;
+			min[2] := number;
+			continue;
+		end;
+		if (number = min[2]) then
+			continue;
+		if (number < min[2]) then
+		begin
+			min[3] := min[2];
+			min[2] := number;
+ 			mincount := mincount + 1;
+			continue;
+		end;
+		if (mincount = 2) then
+		begin
+			mincount := mincount + 1;
+			min[3] := number;
+			continue;
+		end;
+		if (number = min[3]) then
+			continue;
+		if (number < min[3]) then
+		begin
+			min[3] := number;
+ 			mincount := mincount + 1;
+			continue;
+		end;
+	end;
+	if mincount >= 3 then
+		writeln(min[3])
 	else
-		writeln('#'); 
+		writeln('#');
 end.
