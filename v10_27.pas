@@ -51,19 +51,19 @@ begin
 			for i := 1 to ( amount - used ) do
 			begin
 				readln(number);
-				if number > min[3] then
+				if number < min[1] then
 				begin
-					min[1] := min[2];
-					min[2] := min[3];
-					min[3] := number;
+					min[3] := min[2];
+					min[2] := min[1];
+					min[1] := number;
 				end;
-				if ( number < min[3] ) and ( number > min[2] ) then
+				if ( number > min[1] ) and ( number < min[2] ) then
 				begin
-					min[1] := min[2];
+					min[3] := min[2];
 					min[2] := number;
 				end;
-				if ( number < min[2] ) and ( number > min[1] ) then
-					min[1] := number;
+				if ( number > min[2] ) and ( number < min[3] ) then
+					min[3] := number;
 			end;
 			writeln(min[3]);
 		end
