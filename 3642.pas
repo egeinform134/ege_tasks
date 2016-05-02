@@ -1,12 +1,11 @@
 program threesixfourtwo;
 var
-	letters, lengt, shortest, i: integer;
-	spell: array [1..200] of char;
-	c:char;
+	letters, len, shortest, i: integer;
+	spell: string;
+	c: char;
 begin
 	letters := 0;
-
-	(* Непонятный % в выводе в строке 25 *)
+	spell := '';
 
 	while true do
 	begin
@@ -14,41 +13,46 @@ begin
 		if c <> '.' then
 		begin
 			letters := letters + 1;
-			spell[letters] := c;
+			spell := spell + c;
 		end
 		else
+		begin
+			spell := spell + ' ';
+			letters := letters + 1;
 			break;
+		end;
 	end;
 
-	writeln(letters, ' букв');
-	for i := 1 to letters do
-		write(spell[i]);
+	writeln(letters - 1, ' букв');
+	writeln(spell);
 	
 	shortest := 201;
-	lengt := 0;
-	
-	(* Неожиданный вывод в строке 44 для входных данных, где кратчайшее слово в конце.
-	Может быть связано с предыдущей проблемой *)
+	len := 0;
 
 	for i := 1 to letters do 
 		if spell[i] <> ' ' then
-			lengt := lengt + 1
+			len := len + 1
 		else
-			if lengt < shortest then
-			begin
-				shortest := lengt;
-				lengt := 0;
-			end;
+		begin
+			if len < shortest then
+				shortest := len;
+			len := 0;
+		end;
 
-	writeln();
 	writeln(shortest);
-
-	(* Поставить в соответствие каждой букве латинского алфавита
-	число, хранить в массиве заклинание в виде чисел, вычесть из них shortest
-	и вывести числа в виде букв?*)
 
 	for i := 1 to letters do
 	begin
-
+		if spell[i] in ['A'..'Z'] then
+			if ord(spell[i]) + shortest <= ord('Z') then
+				spell[i] := chr( ord( spell[i] ) + shortest)
+			else
+				spell[i] := chr( ord( spell[i] ) + shortest - 26);
+		if spell[i] in ['a'..'z'] then
+			if ord(spell[i]) + shortest <= ord('z') then
+				spell[i] := chr( ord( spell[i] ) + shortest)
+			else
+				spell[i] := chr( ord( spell[i] ) + shortest - 26);
 	end;
+	writeln(spell);
 end.
