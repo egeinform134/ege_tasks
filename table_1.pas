@@ -1,7 +1,7 @@
-program table_1;
+program line_1;
 var
-    N, M, i, j: integer;
-    table: array [1..20, 1..20] of integer;
+    N, M, i, k, tmp: integer;
+    line: array [1..20] of integer;
 function min(x, y: integer): integer;
 begin
     if x < y then
@@ -11,32 +11,24 @@ begin
 end;
 begin
     readln(N, M);
-    for i := 1 to N do
-        for j := 1 to M do
-            read(table[i, j]);
 
-    for i := 1 to N do
-    begin
-        for j := 1 to M do
-            write(table[i, j]: 4);
-        writeln();
-    end;
-
-    for j := 2 to N do
-        table[1, j] := table[1, j - 1] + table[1, j];
-
-    for i := 2 to M do
-        table[i, 1] := table[i - 1, 1] + table[i, 1];
+    for i := 1 to M do
+        read(line[i]);
 
     for i := 2 to N do
-        for j := 2 to M do
-            table[i, j] := min(table[i - 1, j], table[i, j - 1]) + table[i, j];
+        line[i] := line[i - 1] + line[i];
 
-    for i := 1 to N do
+    for k := 2 to N do
     begin
-        for j := 1 to M do
-            write(table[i, j]: 4);
-        writeln();
+        read(tmp);
+        line[1] := line[1] + tmp;
+
+        for i := 2 to M do
+        begin
+            read(tmp);
+            line[i] := min(line[i-1], line[i]) + tmp;
+        end;
     end;
-    writeln(table[N, M]: 4);
+
+    writeln(line[N]);
 end.
