@@ -6,11 +6,15 @@ function crladder(x: integer): integer;
 begin
 	writeln('Функция вызвана для x = ', x);
 	if x = 1 then
-		crladder := 1
+	begin
+		crladder := 1;
+		writeln('x = 1, crladder = 1');
+	end
 	else
 	begin
-		for i := 1 to x - 1 do
+		for i := x - 1 downto 1 do
 		begin
+			writeln('i = ', i);
 			floors := floors + crladder(i); 
 		end;
 		crladder := floors;
