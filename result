@@ -1,0 +1,9 @@
+[sergey@debian /tmp/ege_tasks]$ echo "200" | time ./ladder_fpc_level3 
+487067746
+./ladder_fpc_level3  13,12s user 0,00s system 99% cpu 13,128 total
+[sergey@debian /tmp/ege_tasks]$ echo "200" | time ./ladder_g++_level3
+487067746
+./ladder_g++_level3  3,37s user 0,00s system 99% cpu 3,378 total
+[sergey@debian /tmp/ege_tasks]$ echo "200" | time ./ladder_clang_level3
+487067746
+./ladder_clang_level3  4,26s user 0,00s system 99% cpu 4,263 total
