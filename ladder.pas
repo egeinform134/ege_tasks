@@ -1,10 +1,18 @@
 program ladder;
 var
-        blocks: integer;
+        blocks: longint;
 
-function crladder(x, previous: integer): integer;
+function min(x, y: longint): longint;
+begin
+	if x < y then
+		min := x
+	else
+		min := y;
+end;
+
+function crladder(x, previous: longint): longint;
 var
-        currentfloor, floors: integer;
+        currentfloor, floors: longint;
 begin
         floors := 0;
 
@@ -17,13 +25,14 @@ begin
             end
             else
             begin
-                    for currentfloor := previous - 1 downto 1 do
+                    for currentfloor := min(previous - 1, x) downto 1 do
                     begin
                         floors := floors + crladder(x - currentfloor, currentfloor);
                     end;
                     crladder := floors;
             end;
 end;
+
 
 begin
         readln(blocks);
