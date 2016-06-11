@@ -15,7 +15,7 @@ begin
 			if c = ' ' then
 				chars := chars + 1;
 		until chars = 2;
-		read(mark, cost);
+                readln(mark, cost);
 
 		if mark = 92 then
 			if cost < min_cost_92 then
