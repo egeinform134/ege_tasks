@@ -49,12 +49,15 @@ begin
                 go_string := go_string + c
             else
                 go_string := go_string + '.';
-        until j = 5;
+        until j = 4;
+
+        readln(c);
+        go_string := go_string + c;
 
         val(go_string, go, forval);
         val(come_string, come, forval);
 
-        //  После второго посетителя включительно появляется лишний перевод строки в имени посетителя.
+        // А вот так всё работает
 
         illtake := 0;
 
