@@ -61,28 +61,14 @@ begin
     writeln('Вторая максимальная: ', second_max_mark);
     writeln('Вторых победителей: ', second_winners);
 
-    if cand_winners <= amount / 4 then
-        begin
-            if second_winners = 1 then
-                writeln(second_winner)
-            else
-                writeln(second_winners);
-        end
+    if (cand_winners <= amount / 4) or ((cand_winners > amount / 4) and (max_mark > 300)) then
+        if second_winners = 1 then
+            writeln(second_winner)
         else
-        begin
-            if max_mark > 300 then
-            begin
-                if second_winners = 1 then
-                    writeln(second_winner)
-                else
-                    writeln(second_winners);
-            end
-            else
-            begin
-                if cand_winners = 1 then
-                    writeln(top_winner)
-                else
-                    writeln(cand_winners);
-            end;
-        end;
+            writeln(second_winners);
+    else
+        if cand_winners = 1 then
+            writeln(top_winner)
+        else
+            writeln(cand_winners);
 end.
